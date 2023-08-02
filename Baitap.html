@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai tap</title>
+</head>
+<body>
+    <script>
+    function printTable(){
+        console.table(userList);
+    }
+    let userList = [
+        {
+            id: 1,
+            name: "Rikkei",
+            age: 30,
+        },
+        {
+            id: 2,
+            name: "Academy",
+            age: 20,
+        },
+    ];
+    function addUser(){
+        let maxId = 0;
+        for(let i=0; i <userList.length; i++){
+            maxId = userList[i].id ;
+        }
+        maxId++;
+
+        let name = prompt("Nhập tên'");
+        let age = Number(prompt("Nhập tuổi"));
+
+        let newUser = {
+            id : maxId,
+            name,
+            age,
+        };
+        userList.push(newUser);
+        printTable();
+    }
+
+    function updateUser(){
+        let idUpdate = Number(prompt("Nhập ID:"));
+        let userUpdate;
+        for (let i=0; i<userList.length; i++){
+            if (userList[i].id === idUpdate){
+                userUpdate = userList[i];
+                break;
+            }
+        }
+        
+        if(userUpdate){
+            userUpdate.name = prompt("Nhập tên mới ");
+            userUpdate.age = Number(prompt("Nhâph tuổi mới"));
+            printTable();
+        }
+        else{
+            console.log("Không tìm thấy ID này")
+        }
+    }
+
+    function deleteUser(){
+        let idDelete = Number(prompt("Nhập ID:"));
+        let indexDelete = -1;
+        for (let i=0; i<userList.length; i++){
+            if(userList[i].id === idDelete){
+                indexDelete = i;
+                break;
+            }
+        }
+        if(indexDelete!==-1){
+            userList.splice(indexDelete, 1);
+            printTable();
+        }
+        else{
+            console.log("User không tồn tại")
+        }
+    }
+
+    function main(){
+        while(true){
+            let action = prompt("Cho người dùng nhập vào các chứ cái : C/R/U/D (Hoặc Q để thoát)");
+            if (action.toUpperCase() === "Q"){
+                break;
+            }
+        switch (action.toUpperCase()){
+            case "C" :
+                addUser();
+                break;
+            case "R" :
+                printTable();
+                break;
+            case "U" : 
+                updateUser();
+                break;
+            case "D" :
+                deleteUser();
+                break;
+            default : 
+                console.log("Chữ cái không phù hợp.");
+                break;
+        }
+    }
+}
+    main();
+    console.log(userList.length)
+
+    </script>
+</body>
+</html>
